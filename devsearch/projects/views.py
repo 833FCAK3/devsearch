@@ -3,8 +3,8 @@ from django.shortcuts import render
 
 
 def projects(request):
-    return HttpResponse("Here are our projects")
+    return render(request, 'projects/projects.html')
 
 
 def project(request, pk):
-    return HttpResponse(f"SINGLE PROJECT {pk}")
+    return render(request, 'projects/single-project.html')
