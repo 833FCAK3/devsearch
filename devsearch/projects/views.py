@@ -31,6 +31,6 @@ def projects(request):
 def project(request, pk):
     project_obj = None
     for i in projects_list:
-        if i['id'] == pk:
+        if i["id"] == pk:
             project_obj = i
-    return render(request, "projects/single-project.html", {'project': project_obj})
+    return render(request, "projects/single-project.html", {"project": project_obj})
