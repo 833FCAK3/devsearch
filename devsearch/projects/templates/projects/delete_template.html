@@ -6,9 +6,8 @@
 <form method="POST">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{object}}"?</p>
-    <a href="{% url 'projects' %}">
-        Go Back
-    </a>
+    <input type="button" value="Go back" onclick="javascript:history.go(-1);">
+    <button><a style="text-decoration: none" href="{% url 'projects' %}">Go Back</a></button>
     <input type="submit" value="Confirm">
 </form>
 
