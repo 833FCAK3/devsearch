@@ -1,9 +1,6 @@
 {% extends 'main.html' %}
 {% block content%}
 
-<P>Hello you are on the {{page}} page</P>
-
-<hr>
 <h1>Projects</h1>
 
 <table>
@@ -14,7 +11,7 @@
         <th></th>
         <th></th>
     </tr>
-    {% for project in projects %}
+{% for project in projects %}
     <tr>
         <td>{{project.title}}</td>
         <td>{{project.vote_ratio}}%</td>

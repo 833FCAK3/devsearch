@@ -15,3 +15,6 @@ superuser:
 
 shell:
 	python manage.py shell
+
+collectstatic:
+	python manage.py collectstatic

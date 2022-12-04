@@ -1,3 +1,4 @@
+from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -5,22 +6,22 @@ from .forms import ProjectForm
 from .models import Project
 
 
-def projects(request):
+def projects(request: WSGIRequest):
     projects = Project.objects.all()
     context = {"projects": projects}
     return render(request, "projects/projects.html", context)
 
 
-def project(request, pk):
+def project(request: WSGIRequest, pk):
     project_obj = Project.objects.get(id=pk)
     return render(request, "projects/single-project.html", {"project": project_obj})
 
 
-def create_project(request):
+def create_project(request: WSGIRequest):
     form = ProjectForm()
 
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("projects")
@@ -29,12 +30,12 @@ def create_project(request):
     return render(request, "projects/project_form.html", context)
 
 
-def update_project(request, pk):
+def update_project(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
 
     if request.method == "POST":
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
             return redirect("projects")
@@ -43,7 +44,7 @@ def update_project(request, pk):
     return render(request, "projects/project_form.html", context)
 
 
-def delete_project(request, pk):
+def delete_project(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     if request.method == "POST":
         project.delete()
