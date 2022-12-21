@@ -17,7 +17,7 @@ def project(request: WSGIRequest, pk):
     return render(request, "projects/single-project.html", {"project": project_obj})
 
 
-def create_project(request: WSGIRequest):
+def createProject(request: WSGIRequest):
     form = ProjectForm()
 
     if request.method == "POST":
@@ -30,7 +30,7 @@ def create_project(request: WSGIRequest):
     return render(request, "projects/project_form.html", context)
 
 
-def update_project(request: WSGIRequest, pk):
+def updateProject(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
 
@@ -44,7 +44,7 @@ def update_project(request: WSGIRequest, pk):
     return render(request, "projects/project_form.html", context)
 
 
-def delete_project(request: WSGIRequest, pk):
+def deleteProject(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     if request.method == "POST":
         project.delete()
