@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -17,6 +18,7 @@ def project(request: WSGIRequest, pk):
     return render(request, "projects/single-project.html", {"project": project_obj})
 
 
+@login_required(login_url="login")
 def createProject(request: WSGIRequest):
     form = ProjectForm()
 
@@ -30,6 +32,7 @@ def createProject(request: WSGIRequest):
     return render(request, "projects/project_form.html", context)
 
 
+@login_required(login_url="login")
 def updateProject(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
@@ -44,6 +47,7 @@ def updateProject(request: WSGIRequest, pk):
     return render(request, "projects/project_form.html", context)
 
 
+@login_required(login_url="login")
 def deleteProject(request: WSGIRequest, pk):
     project = Project.objects.get(id=pk)
     if request.method == "POST":
